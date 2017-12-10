@@ -1,8 +1,10 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { configure, shallow } from 'enzyme';
+import * as ReactSixteenAdapter from 'enzyme-adapter-react-16';
 import App from './App';
 
+configure({ adapter: new ReactSixteenAdapter() });
+
 it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+  shallow(<App />);
 });

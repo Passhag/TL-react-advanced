@@ -1,0 +1,39 @@
+@import "~bootstrap/scss/bootstrap";
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
+
+#root, .app > .container {
+    height: 100vh;
+}
+
+.app-wrapper {
+    min-width: 40%;
+}
+
+.app-header {
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid $primary;
+    text-align: center;
+}
+
+.tl-input-wrapper {
+    margin-bottom: 0.5rem;
+}
+
+.tl-list-wrapper {
+    height: 40vh;
+    overflow-y: scroll;
+    margin-bottom: 0.5rem;
+    will-change: transform;
+}
+
+.tl-footer__btn {
+    width: 100%;
+}
+
+.tl-todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
