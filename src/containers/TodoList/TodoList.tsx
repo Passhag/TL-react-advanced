@@ -10,7 +10,7 @@ interface Props {
   loadTodos(filters?: { [key: string]: string }): () => void;
 }
 
-class TodoListContainer extends React.Component<Props, {}> {
+export class TodoListContainer extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
   }
@@ -37,4 +37,7 @@ const mapDispatchToProps = (dispatch: Function) => ({
   loadTodos: (filters?: { [key: string]: string }) => dispatch(loadTodos(filters)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoListContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoListContainer);
