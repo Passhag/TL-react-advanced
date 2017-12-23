@@ -23,3 +23,8 @@ export const TodosActions = {
 export const TodosFormActions = {
   SET_TODO: 'SET_TODO',
 };
+
+export const ModalActions = {
+  SET_IS_OPEN: 'SET_IS_OPEN',
+  SET_CONTENT: 'SET_CONTENT',
+};

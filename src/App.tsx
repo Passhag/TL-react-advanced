@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Header } from './components/Header';
 import { TodoListContainer } from './containers/TodoList';
 import { TodoFormContainer } from './containers/TodoForm';
+import { ModalContainer } from './containers/Modal';
 
 class App extends React.Component<{}, {}> {
   render() {
@@ -25,6 +26,7 @@ class App extends React.Component<{}, {}> {
             </div>
           </div>
         </div>
+        <ModalContainer />
       </div>
     );
   }

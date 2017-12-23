@@ -1,6 +1,7 @@
 import {
   TodosState,
   TodosFormState,
+  ModalState,
 } from '../redux-policy';
 
 const createTodosState = (): TodosState => ({
@@ -13,7 +14,13 @@ const createTodosFormState = (): TodosFormState => ({
   todo: null,
 });
 
+const createModalState = (): ModalState => ({
+  isOpen: false,
+  content: null,
+});
+
 export {
   createTodosState,
   createTodosFormState,
+  createModalState,
 };

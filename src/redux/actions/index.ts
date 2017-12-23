@@ -11,7 +11,12 @@ import {
 import {
   TodosActions,
   TodosFormActions,
+  ModalActions,
 } from './constants';
+import {
+  setIsOpen,
+  setContent,
+} from './modal.actions';
 
 export {
   TodosActions,
@@ -22,4 +27,7 @@ export {
   replaceTodo,
   TodosFormActions,
   setTodo,
+  ModalActions,
+  setIsOpen,
+  setContent,
 };
