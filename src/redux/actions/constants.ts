@@ -25,6 +25,7 @@ export const TodosFormActions = {
 };
 
 export const ModalActions = {
-  SET_IS_OPEN: 'SET_IS_OPEN',
+  SET_MODAL_OPEN: 'SET_MODAL_OPEN',
+  SET_MODAL_CLOSE: 'SET_MODAL_CLOSE',
   SET_CONTENT: 'SET_CONTENT',
 };

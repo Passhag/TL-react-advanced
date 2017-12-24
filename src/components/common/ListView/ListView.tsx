@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface Props {
-  ViewItem: React.ComponentClass<any> | React.SFC<any>;
+ViewItem: React.ComponentClass<any> | React.SFC<any>;
   items: (Object & { id: string | number })[];
 }
 

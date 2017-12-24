@@ -1,17 +1,19 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { removeTodo, updateTodo, setIsOpen, setContent } from '../../redux/actions';
+import {
+  removeTodo,
+  setModalOpen,
+  setModalContent,
+} from '../../redux/actions';
 import { Todo } from '../../api';
 import { TodoViewItem } from '../../components/TodoViewItem';
-
-const ContentCmp = () => <h1>Modal Content</h1>;
+import { TodoEditFormContainer } from '../../containers/TodoEditForm';
 
 interface Props {
   item: Todo & { id: string };
   removeTodo(id: string): () => void;
-  updateTodo(todo: Todo): () => void;
-  openModal(): any;
-  setModalContent(arg: any): any;
+  openModal(): () => void;
+  setModalContent(ModalContent: React.ComponentClass<any> | React.SFC<any>): () => void;
 }
 
 class TodoViewItemContainer extends React.Component<Props, {}> {
@@ -29,8 +31,10 @@ class TodoViewItemContainer extends React.Component<Props, {}> {
   }
 
   handleEditBtnOnClick(event: React.MouseEvent<HTMLButtonElement>): void {
+    const aContent = (todo) =>
+      () => <TodoEditFormContainer todo={todo} />;
     event.stopPropagation();
-    this.props.setModalContent(ContentCmp);
+    this.props.setModalContent(aContent(this.props.item));
     this.props.openModal();
   }
 
@@ -47,9 +51,9 @@ class TodoViewItemContainer extends React.Component<Props, {}> {
 
 const mapDispatchToProps = (dispatch: Function) => ({
   removeTodo: (id: string) => dispatch(removeTodo(id)),
-  updateTodo: (todo: Todo) => dispatch(updateTodo(todo)),
-  openModal: () => dispatch(setIsOpen(true)),
-  setModalContent: (ContentCmp) => dispatch(setContent(ContentCmp)),
+  openModal: () => dispatch(setModalOpen()),
+  setModalContent: (ModalContent: React.ComponentClass<any> | React.SFC<any>) =>
+    dispatch(setModalContent({ ModalContent })),
 });
 
 export default connect(undefined, mapDispatchToProps)(TodoViewItemContainer);

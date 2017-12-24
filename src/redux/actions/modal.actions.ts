@@ -1,21 +1,23 @@
 import { Action } from '../redux-policy';
 import { ModalActions } from './constants';
 
-const setIsOpen = (isOpen: boolean): Action => ({
-  type: ModalActions.SET_IS_OPEN,
-  payload: {
-    isOpen,
-  },
+const setModalOpen = (): Action => ({
+  type: ModalActions.SET_MODAL_OPEN,
 });
 
-const setContent = (content: React.ComponentClass<any> | React.SFC<any>) => ({
+const setModalClose = (): Action => ({
+  type: ModalActions.SET_MODAL_CLOSE,
+});
+
+const setModalContent = ({ ModalContent }) => ({
   type: ModalActions.SET_CONTENT,
   payload: {
-    content,
+    ModalContent,
   },
 });
 
 export {
-  setIsOpen,
-  setContent,
+  setModalOpen,
+  setModalClose,
+  setModalContent,
 };
