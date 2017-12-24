@@ -14,8 +14,9 @@ import {
   ModalActions,
 } from './constants';
 import {
-  setIsOpen,
-  setContent,
+  setModalOpen,
+  setModalClose,
+  setModalContent,
 } from './modal.actions';
 
 export {
@@ -28,6 +29,7 @@ export {
   TodosFormActions,
   setTodo,
   ModalActions,
-  setIsOpen,
-  setContent,
+  setModalOpen,
+  setModalClose,
+  setModalContent,
 };

@@ -16,7 +16,7 @@ const createTodosFormState = (): TodosFormState => ({
 
 const createModalState = (): ModalState => ({
   isOpen: false,
-  content: null,
+  ModalContent: null,
 });
 
 export {

@@ -12,7 +12,7 @@ export interface TodosFormState {
 
 export interface ModalState {
   isOpen: boolean;
-  content: React.ComponentClass<any> | React.SFC<any> | null;
+  ModalContent: React.ComponentClass<any> | React.SFC<any> | null;
 }
 
 export interface AppState {
