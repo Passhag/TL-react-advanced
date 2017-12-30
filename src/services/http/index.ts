@@ -1,20 +1,8 @@
-import HttpServiceFactory from './http.service.abstract-factory-impl';
-import {
-  
-} from './request-opts';
-import {
-  ResponseFireBaseGet,
-  ResponseFireBasePatch,
-  ResponseFireBasePost,
-  ResponseFireBasePut,
-  ResponseFireBaseDelete,
-} from './response';
+import HttpFactory from './http-provider-factory-impl';
+export { HttpProviderType } from './http-provider-factory';
+export { RequestOpts } from './request-opts';
+export { Response } from './response';
 
 export {
-  HttpServiceFactory,
-  ResponseFireBaseGet,
-  ResponseFireBasePatch,
-  ResponseFireBasePost,
-  ResponseFireBasePut,
-  ResponseFireBaseDelete,
+  HttpFactory,
 };

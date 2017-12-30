@@ -1,10 +1,7 @@
 import {
-  HttpServiceFactory,
-  ResponseFireBaseGet,
-  ResponseFireBasePost,
-  ResponseFireBasePut,
-  ResponseFireBaseDelete,
-  ResponseFireBasePatch,
+  HttpFactory,
+  HttpProviderType,
+  Response,
 } from '../../services/http';
 import { TodosPaths } from './constants';
 
@@ -30,12 +27,12 @@ export interface TodosPatchResponse {
 export interface TodosDeleteResponse {
 }
 
-const httpService = new HttpServiceFactory()
-  .createFireBaseService();
+const firebaseProvider = new HttpFactory()
+  .createHttpProvider(HttpProviderType.Firebase);
 
 const loadTodos = (params?: { [key: string]: string }): Promise<TodosGetResponse> =>
-  httpService.get<Todo[]>(TodosPaths.TODOS_DATA, params)
-    .then((response: ResponseFireBaseGet<Todo[]>) => ({
+  firebaseProvider.get(TodosPaths.TODOS_DATA, params)
+    .then((response: Response) => ({
       data: response.body
     }))
     .catch(error => {
@@ -43,8 +40,8 @@ const loadTodos = (params?: { [key: string]: string }): Promise<TodosGetResponse
     });
 
 const createTodo = (todo: Todo): Promise<TodosPostResponse> =>
-  httpService.post<Todo, Todo>(TodosPaths.TODOS_DATA, todo)
-    .then((response: ResponseFireBasePost<Todo>) => ({
+  firebaseProvider.post(TodosPaths.TODOS_DATA, { body: todo })
+    .then((response: Response) => ({
       data: response.body,
     }))
     .catch(error => {
@@ -52,22 +49,22 @@ const createTodo = (todo: Todo): Promise<TodosPostResponse> =>
     });
 
 const updateTodo = (todo: Todo): Promise<TodosPatchResponse> =>
-  httpService.patch<Todo>(TodosPaths.TODOS_DATA, todo)
-    .then((response: ResponseFireBasePut) => response)
+  firebaseProvider.patch(TodosPaths.TODOS_DATA, { body: todo })
+    .then((response: Response) => response)
     .catch(error => {
       throw error;
     });
 
 const patchTodo = (todo: Todo): Promise<TodosPatchResponse> =>
-  httpService.patch<Todo>(TodosPaths.TODOS_DATA, todo)
-    .then((response: ResponseFireBasePatch) => response)
+  firebaseProvider.patch(TodosPaths.TODOS_DATA, { body: todo })
+    .then((response: Response) => response)
     .catch(error => {
       throw error;
     });
 
 const removeTodo = (id: string): Promise<TodosDeleteResponse> =>
-  httpService.delete(`${TodosPaths.TODOS_DATA}/${id}`)
-    .then((response: ResponseFireBaseDelete) => response)
+  firebaseProvider.delete(`${TodosPaths.TODOS_DATA}/${id}`)
+    .then((response: Response) => response)
     .catch(error => {
       throw error;
     });

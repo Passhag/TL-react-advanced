@@ -1,18 +1,10 @@
 import { initializeApp, database } from 'firebase';
-import { BeConnector } from './be-connector';
+import { HttpProvider } from '../http-provider';
 import {
-  ResponseFireBaseDelete,
-  ResponseFireBaseGet,
-  ResponseFireBasePost,
-  ResponseFireBasePatch,
-  ResponseFireBasePut,
+  ResponseFirebase,
 } from '../response';
 import {
-  RequestOptsFireBaseGet,
-  RequestOptsFireBasePost,
-  RequestOptsFireBasePatch,
-  RequestOptsFireBasePut,
-  RequestOptsFireBaseDelete,
+  RequestOptsFirebase,
 } from '../request-opts';
 
 const config = {
@@ -26,11 +18,11 @@ const config = {
 
 initializeApp(config);
 
-export default class BeConnectorFireBaseImp implements BeConnector {
-  public sendGetRequest<T>(url: string, requestOpts: RequestOptsFireBaseGet): Promise<ResponseFireBaseGet<T[]>> {
+export class FirebaseProvider implements HttpProvider {
+  public get(url: string, requestOpts?: RequestOptsFirebase): Promise<ResponseFirebase> {
     let ref = database().ref(url);
 
-    if (requestOpts.params !== undefined) {
+    if (requestOpts && requestOpts.params !== undefined) {
       Object.keys(requestOpts.params).forEach((key) => {
         ref = ref[key].call(ref, (requestOpts.params as Object)[key]);
       });
@@ -39,7 +31,7 @@ export default class BeConnectorFireBaseImp implements BeConnector {
     return Promise.resolve(
       ref.once('value')
         .then((snapshot) => {
-          const result: T[] = [];
+          const result: any[] = [];
 
           snapshot.forEach((child: database.DataSnapshot) => {
             const key = child.key;
@@ -62,7 +54,7 @@ export default class BeConnectorFireBaseImp implements BeConnector {
     );
   }
 
-  public sendPostRequest<T, U>(url: string, requestOpts: RequestOptsFireBasePost<T>): Promise<ResponseFireBasePost<U>> {
+  public post(url: string, requestOpts: RequestOptsFirebase): Promise<ResponseFirebase> {
     return Promise.resolve(
       database().ref(url).push(requestOpts.body).once('value')
         .then((snapshot: database.DataSnapshot) => {
@@ -80,19 +72,19 @@ export default class BeConnectorFireBaseImp implements BeConnector {
     );
   }
 
-  public sendPatchRequest<T>(url: string, requestOpts: RequestOptsFireBasePatch<T>): Promise<ResponseFireBasePatch> {
+  public patch(url: string, requestOpts: RequestOptsFirebase): Promise<ResponseFirebase> {
     return Promise.resolve(
       database().ref(url).set(requestOpts.body)
     );
   }
 
-  public sendPutRequest<T>(url: string, requestOpts: RequestOptsFireBasePut<T>): Promise<ResponseFireBasePut> {
+  public put(url: string, requestOpts: RequestOptsFirebase): Promise<ResponseFirebase> {
     return Promise.resolve(
       database().ref(url).set(requestOpts.body)
     );
   }
 
-  public sendDeleteRequest(url: string, requestOpts: RequestOptsFireBaseDelete): Promise<ResponseFireBaseDelete> {
+  public delete(url: string): Promise<ResponseFirebase> {
     return Promise.resolve(
       database().ref(url).remove()
     );
